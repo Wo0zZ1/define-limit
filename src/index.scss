@@ -1,0 +1,30 @@
+/* tailwindcss */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+#root {
+	font-family: Inter, 'Roboto', system-ui, Avenir, Helvetica,
+		Arial, sans-serif;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* color-scheme: light dark; */
+}
+
+body {
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
+}
+
+.container {
+	max-width: 1440px;
+	margin: 0 auto;
+}
