@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Latex from 'react-latex'
+import { getInputWidth, inputSelectHandler } from './utils'
 
 // const getFormula = data => {
 // 	if (typeof data === 'string') {
@@ -34,21 +35,23 @@ const App = () => {
 		<div className='flex flex-col items-center w-screen gap-2'>
 			<input
 				style={{
-					width: (approaching.length + 2) * 12 + 'px',
+					width: getInputWidth(approaching.length),
 				}}
-				className={`flex justify-center items-center outline-none h-[24px] border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[24px]`}
+				className={`box-content outline-none h-[18px] p-[6px] pt-[4px] border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[28px]`}
 				required
 				value={approaching}
 				onChange={approachingHandler}
+				onFocus={inputSelectHandler}
 			/>
 			<input
 				style={{
-					width: (equal.length + 2) * 12 + 'px',
+					width: getInputWidth(equal.length),
 				}}
-				className={`flex justify-center items-center outline-none h-[24px] border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[24px]`}
+				className={`box-content outline-none h-[18px] p-[6px] pt-[4px] border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[28px]`}
 				required
 				value={equal}
 				onChange={equalHandler}
+				onFocus={inputSelectHandler}
 			/>
 			<div className='text-3xl'>
 				RESULT: &nbsp;
