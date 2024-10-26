@@ -28,17 +28,21 @@ palitra:
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	/* color-scheme: light dark; */
-}
 
-body {
-	margin: 0;
-	display: flex;
-	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
 }
 
-.container {
-	max-width: 1440px;
-	margin: 0 auto;
+body {
+	margin: 0;
+
+	// background image
+	background-image: url('/bg.png');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+// Glass effect
+.glass {
 }
