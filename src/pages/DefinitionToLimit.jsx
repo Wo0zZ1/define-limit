@@ -1,6 +1,12 @@
 import Layout from '../layout/main'
 
+import Limit from '../components/limit'
+
 const DefinitionToLimit = () => {
-	return <Layout>D2L</Layout>
+	return (
+		<Layout>
+			<Limit />
+		</Layout>
+	)
 }
 export default DefinitionToLimit

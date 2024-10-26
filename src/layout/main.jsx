@@ -4,7 +4,7 @@ const main = ({ children }) => {
 	return (
 		<>
 			<Header />
-			{children}
+			<div className='glass rounded-xl'>{children}</div>
 		</>
 	)
 }
