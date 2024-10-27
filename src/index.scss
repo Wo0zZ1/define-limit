@@ -27,6 +27,7 @@ palitra:
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
 	/* color-scheme: light dark; */
 
 	min-width: 320px;
@@ -43,7 +44,15 @@ body {
 	background-repeat: no-repeat;
 }
 
+.container {
+	padding: 0 2rem;
+
+	@media (width <= 600px) {
+		padding: 0 1rem;
+	}
+}
+
 // Glass effect
 .glass {
-	@apply backdrop-blur-sm;
+	@apply backdrop-blur-md;
 }

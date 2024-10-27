@@ -4,8 +4,8 @@ import Logo from '../logo'
 
 const index = () => {
 	return (
-		<header className='w-full bg-white h-24 px-20 py-4 shadow-md'>
-			<div className='container w-full m-auto h-full flex justify-between items-center'>
+		<header className='w-full bg-white h-24 shadow-md'>
+			<div className='hidden container w-full m-auto h-full sm:flex justify-between items-center'>
 				<Logo />
 				<Link
 					to='/definition-to-limit'
