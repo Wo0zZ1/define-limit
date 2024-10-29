@@ -10,7 +10,7 @@ const index = () => {
 				<Link
 					to='/definition-to-limit'
 					className='flex text-3xl py-3 px-5 rounded-xl bg-[#8d98e8bd] hover:bg-[#8D97E8] transition-colors text-[#333333] font-bold uppercase'>
-					Go to definition
+					<span>Go to definition</span>
 				</Link>
 			</div>
 		</header>
