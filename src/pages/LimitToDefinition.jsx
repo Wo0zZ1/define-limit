@@ -6,8 +6,8 @@ import DefinitionForm from '../components/DefinitionForm'
 const LimitToDefinition = () => {
 	return (
 		<Layout>
-			<LimitForm />
-			<DefinitionForm type='inputt' />
+			<LimitForm type='input' />
+			<DefinitionForm type='display' />
 		</Layout>
 	)
 }

@@ -2,29 +2,30 @@ import Latex from 'react-latex'
 import InputBox from '../InputBox'
 
 /*
+TODO
 type = 'input | display'
 */
 
 const DefinitionForm = ({ type }) => {
+	if (type === 'input') {
+		return (
+			<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>
+				<Latex>
+					{`$\\forall ε > 0 \\space \\exists δ = δ(ε) > 0: \\forall ${'x'}: $`}
+				</Latex>
+				<InputBox defaultValue={'x<-δ'} />
+				<Latex>{`$ \\Rightarrow $`}</Latex>
+				<InputBox defaultValue={'|f(x)-27|'} max={12} />
+				<Latex>{`$ <ε $`}</Latex>
+			</div>
+		)
+	}
+
 	return (
 		<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>
-			<Latex>$∀ε&gt;0∃δ=δ(ε)&gt;0:∀X:$</Latex>
-			{type === 'input' ? (
-				<InputBox defaultValue={'0<|f(x)|<δ'} />
-			) : (
-				<Latex>{`$0<|f(x)|<δ$`}</Latex>
-			)}
-			<Latex className=''>$⇒$</Latex>
-			{type === 'input' ? (
-				<InputBox
-					defaultValue={'|f(x)-27|'}
-					max={12}
-					className=''
-				/>
-			) : (
-				<Latex>{`$&gt;ε$`}</Latex>
-			)}
+			<Latex>{`$ \\forall ε > 0 \\space ∃δ = δ(ε) > 0: \\forall ${'x'}: ${'x < -δ'} \\Rightarrow ${'|f(x) - 27|'} < ε $`}</Latex>
 		</div>
 	)
 }
+
 export default DefinitionForm
