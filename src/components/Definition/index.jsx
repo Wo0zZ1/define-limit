@@ -1,6 +1,6 @@
 import InputBox from '../InputBox'
 
-const Limit = ({ className }) => {
+const Definition = ({ className }) => {
 	return (
 		<div className={`${className} relative w-[100px] h-[80px]`}>
 			<span
@@ -19,4 +19,4 @@ const Limit = ({ className }) => {
 	)
 }
 
-export default Limit
+export default Definition

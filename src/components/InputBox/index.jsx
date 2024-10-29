@@ -27,7 +27,9 @@ const InputBox = ({
 				width: getInputWidth(equal.length, size),
 				height: size,
 			}}
-			className={`${className} flex outline-none text-center border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[29px]`}
+			className={`${className} flex p-${
+				size === 32 ? 1 : 0
+			} outline-none text-center border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[29px]`}
 			required
 			value={equal}
 			onChange={equalHandler}
