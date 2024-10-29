@@ -15,11 +15,6 @@ const DefinitionForm: FC<IFormProps> = ({ type }) => {
 
 	const dispatch = useDispatch()
 
-	// TODO DELETE
-	useEffect(() => {
-		console.log(data)
-	}, [data])
-
 	if (type === 'display') {
 		return (
 			<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>

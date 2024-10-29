@@ -15,11 +15,6 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 
 	const dispatch = useDispatch()
 
-	// TODO DELETE
-	useEffect(() => {
-		console.log(data)
-	}, [data])
-
 	if (type === 'display') {
 		return (
 			<div className='flex justify-center p-4 items-center min-w-[350px] min-h-[130px] bg-white rounded-lg shadow-md relative text-3xl'>

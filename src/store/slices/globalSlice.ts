@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { Exception } from 'sass'
 
 export interface ILimitState {
 	from: string
@@ -31,6 +32,30 @@ const initialState: globalState = {
 	},
 }
 
+const calculateDefinition = (
+	limitForm: ILimitState,
+): IDefinitionState => {
+	const { from, to, func, equal } = limitForm
+	console.log(from, to)
+	throw new Error('Function not completed')
+}
+
+const calculateLimit = (
+	definitionForm: IDefinitionState,
+): ILimitState => {
+	const { gamma, eps } = definitionForm
+	throw new Error('Function not completed')
+}
+
+const calculate = (state: globalState, type: 1 | 2) => {
+	console.log(`calculating`)
+	// Логика вычислений
+	if (type === 1)
+		state.definitionForm = calculateDefinition(state.limitForm)
+	else if (type === 2)
+		state.limitForm = calculateLimit(state.definitionForm)
+}
+
 export const globalSlice = createSlice({
 	name: 'globalSlice',
 	initialState,
@@ -40,12 +65,14 @@ export const globalSlice = createSlice({
 			action: PayloadAction<ILimitState>,
 		) => {
 			state.limitForm = action.payload
+			calculate(state, 1)
 		},
 		setDefinitionForm: (
 			state,
 			action: PayloadAction<IDefinitionState>,
 		) => {
 			state.definitionForm = action.payload
+			calculate(state, 2)
 		},
 	},
 })
