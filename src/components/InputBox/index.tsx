@@ -1,38 +1,45 @@
-import { useState } from 'react'
+import { ChangeEvent, FC } from 'react'
 
 import { getInputWidth, inputSelectHandler } from '../../utils'
 
-const InputBox = ({
-	className,
-	max,
-	defaultValue,
-	link,
-	size,
+export interface IInputBoxProps {
+	value: string
+	handler: (value: string) => void
+	className?: string
+	maxLength?: number
+	size?: 32 | 64
+}
+
+const InputBox: FC<IInputBoxProps> = ({
+	className = '',
+	value,
+	handler,
+	maxLength = 50,
+	size = 32,
 }) => {
-	const [equal, setEqual] = useState(defaultValue || '')
-
-	if (!size) size = 32
-
-	const equalHandler = e => {
-		const data = e.target.value
-		if (data.length > max) return
-		if (Number.isInteger(data)) setEqual(Number(data))
-		else setEqual(data.replace(/[iI][nN][fF]|&/g, _ => '∞'))
+	const changeHandler = (
+		e: ChangeEvent<HTMLInputElement>,
+	): void => {
+		const data = e.target.value.replace(
+			/[iI][nN][fF]|&/g,
+			_ => '∞',
+		)
+		if (data.length > maxLength) return
+		handler(data)
 	}
 
 	return (
 		<input
-			ref={link}
 			style={{
-				width: getInputWidth(equal.length, size),
+				width: getInputWidth(value.length, size),
 				height: size,
 			}}
 			className={`${className} flex p-${
 				size === 32 ? 1 : 0
 			} outline-none text-center border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[29px]`}
 			required
-			value={equal}
-			onChange={equalHandler}
+			value={value}
+			onChange={changeHandler}
 			onFocus={inputSelectHandler}
 		/>
 	)

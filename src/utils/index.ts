@@ -1,4 +1,4 @@
-export const getInputWidth = (length, size) => {
+export const getInputWidth = (length: number, size: number) => {
 	return Math.max(size, (length + 1) * 16) + 'px'
 }
 

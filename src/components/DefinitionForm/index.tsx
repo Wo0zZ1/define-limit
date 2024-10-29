@@ -1,15 +1,26 @@
+import { FC, useEffect } from 'react'
 import Latex from 'react-latex'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { setDefinitionForm } from '../../store/slices/globalSlice'
+import { RootState } from '../../store'
 
 import InputBox from '../InputBox'
 
-/*
-TODO
-type = 'input | display'
-*/
+// TODO Обобщить
+export interface IDefinitionFormProps {
+	type: 'input' | 'display'
+}
 
-const DefinitionForm = ({ type }) => {
-	const data = useSelector(state => state.DefinitionForm)
+const DefinitionForm: FC<IDefinitionFormProps> = ({ type }) => {
+	const data = useSelector(
+		(state: RootState) => state.globalSlice.definitionForm,
+	)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		console.log(data)
+	}, [data])
 
 	if (type === 'input') {
 		return (
@@ -17,9 +28,23 @@ const DefinitionForm = ({ type }) => {
 				<Latex>
 					{`$\\forall ε > 0 \\space \\exists δ = δ(ε) > 0: \\forall ${'x'}: $`}
 				</Latex>
-				<InputBox defaultValue={'x<-δ'} />
+				<InputBox
+					value={data.gamma}
+					handler={value =>
+						dispatch(
+							setDefinitionForm({ ...data, gamma: value }),
+						)
+					}
+					maxLength={12}
+				/>
 				<Latex>{`$ \\Rightarrow $`}</Latex>
-				<InputBox defaultValue={'|f(x)-27|'} max={12} />
+				<InputBox
+					value={data.eps}
+					handler={value =>
+						dispatch(setDefinitionForm({ ...data, eps: value }))
+					}
+					maxLength={12}
+				/>
 				<Latex>{`$ <ε $`}</Latex>
 			</div>
 		)

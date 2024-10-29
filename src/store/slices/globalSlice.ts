@@ -1,6 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
+export interface ILimitState {
+	from: string
+	to: string
+	func: string
+	equal: string
+}
+
+export interface IDefinitionState {
+	gamma: string
+	eps: string
+}
+
+export interface globalState {
+	limitForm: ILimitState
+	definitionForm: IDefinitionState
+}
+
+const initialState: globalState = {
 	limitForm: {
 		from: 'x',
 		to: '-∞',
@@ -17,15 +35,22 @@ export const globalSlice = createSlice({
 	name: 'globalSlice',
 	initialState,
 	reducers: {
-		setLimitForm: (state, data) => {
-			state.limitForm = data.payload
+		setLimitForm: (
+			state,
+			action: PayloadAction<ILimitState>,
+		) => {
+			state.limitForm = action.payload
 		},
-		setDefinitionForm: (state, data) => {
-			state.definitionForm = data.payload
+		setDefinitionForm: (
+			state,
+			action: PayloadAction<IDefinitionState>,
+		) => {
+			state.definitionForm = action.payload
 		},
 	},
 })
 
-export const { increment } = globalSlice.actions
+export const { setLimitForm, setDefinitionForm } =
+	globalSlice.actions
 
 export default globalSlice.reducer
