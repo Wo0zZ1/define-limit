@@ -1,13 +1,25 @@
+import { FC, useEffect } from 'react'
 import Latex from 'react-latex'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { setLimitForm } from '../../store/slices/globalSlice'
+import { RootState } from '../../store'
 
 import InputBox from '../InputBox'
+import { IFormProps } from '../../utils/types'
 
-/*
-TODO
-type = 'input | display'
-*/
+const LimitForm: FC<IFormProps> = ({ type }) => {
+	const data = useSelector(
+		(state: RootState) => state.globalSlice.limitForm,
+	)
 
-const LimitForm = ({ type }) => {
+	const dispatch = useDispatch()
+
+	// TODO DELETE
+	useEffect(() => {
+		console.log(data)
+	}, [data])
+
 	if (type === 'display') {
 		return (
 			<div className='flex justify-center p-4 items-center min-w-[350px] min-h-[130px] bg-white rounded-lg shadow-md relative text-3xl'>
@@ -22,9 +34,20 @@ const LimitForm = ({ type }) => {
 				<div className={`absolute left-1/2 -translate-x-1/2`}>
 					<Latex>{'$\\lim$'}</Latex>
 				</div>
-				<InputBox max={1} className='absolute bottom-0 left-0' />
 				<InputBox
-					max={3}
+					value={data.from}
+					handler={value =>
+						dispatch(setLimitForm({ ...data, from: value }))
+					}
+					maxLength={1}
+					className='absolute bottom-0 left-0'
+				/>
+				<InputBox
+					value={data.to}
+					handler={value =>
+						dispatch(setLimitForm({ ...data, to: value }))
+					}
+					maxLength={3}
 					className='absolute bottom-0 -translate-x-[32px] left-full'
 				/>
 				<div className='absolute bottom-0 -translate-x-1/2 left-1/2 text-2xl'>
@@ -33,9 +56,22 @@ const LimitForm = ({ type }) => {
 			</div>
 
 			<div className='flex gap-2 items-center -mt-4'>
-				<InputBox defaultValue={'f(x)'} size={48} />
+				<InputBox
+					value={data.func}
+					handler={value =>
+						dispatch(setLimitForm({ ...data, func: value }))
+					}
+					maxLength={10}
+					size={48}
+				/>
 				<Latex>$=$</Latex>
-				<InputBox max={10} />
+				<InputBox
+					value={data.equal}
+					handler={value =>
+						dispatch(setLimitForm({ ...data, equal: value }))
+					}
+					maxLength={10}
+				/>
 			</div>
 		</div>
 	)

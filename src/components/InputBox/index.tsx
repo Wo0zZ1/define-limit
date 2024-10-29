@@ -2,12 +2,13 @@ import { ChangeEvent, FC } from 'react'
 
 import { getInputWidth, inputSelectHandler } from '../../utils'
 
+// TODO change type for handler
 export interface IInputBoxProps {
 	value: string
 	handler: (value: string) => void
 	className?: string
 	maxLength?: number
-	size?: 32 | 64
+	size?: 32 | 48
 }
 
 const InputBox: FC<IInputBoxProps> = ({

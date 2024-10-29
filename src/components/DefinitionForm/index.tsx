@@ -6,53 +6,49 @@ import { setDefinitionForm } from '../../store/slices/globalSlice'
 import { RootState } from '../../store'
 
 import InputBox from '../InputBox'
+import { IFormProps } from '../../utils/types'
 
-// TODO Обобщить
-export interface IDefinitionFormProps {
-	type: 'input' | 'display'
-}
-
-const DefinitionForm: FC<IDefinitionFormProps> = ({ type }) => {
+const DefinitionForm: FC<IFormProps> = ({ type }) => {
 	const data = useSelector(
 		(state: RootState) => state.globalSlice.definitionForm,
 	)
+
 	const dispatch = useDispatch()
 
+	// TODO DELETE
 	useEffect(() => {
 		console.log(data)
 	}, [data])
 
-	if (type === 'input') {
+	if (type === 'display') {
 		return (
 			<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>
-				<Latex>
-					{`$\\forall ε > 0 \\space \\exists δ = δ(ε) > 0: \\forall ${'x'}: $`}
-				</Latex>
-				<InputBox
-					value={data.gamma}
-					handler={value =>
-						dispatch(
-							setDefinitionForm({ ...data, gamma: value }),
-						)
-					}
-					maxLength={12}
-				/>
-				<Latex>{`$ \\Rightarrow $`}</Latex>
-				<InputBox
-					value={data.eps}
-					handler={value =>
-						dispatch(setDefinitionForm({ ...data, eps: value }))
-					}
-					maxLength={12}
-				/>
-				<Latex>{`$ <ε $`}</Latex>
+				<Latex>{`$ \\forall ε > 0 \\space ∃δ = δ(ε) > 0: \\forall ${'x'}: ${'x < -δ'} \\Rightarrow ${'|f(x) - 27|'} < ε $`}</Latex>
 			</div>
 		)
 	}
 
 	return (
 		<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>
-			<Latex>{`$ \\forall ε > 0 \\space ∃δ = δ(ε) > 0: \\forall ${'x'}: ${'x < -δ'} \\Rightarrow ${'|f(x) - 27|'} < ε $`}</Latex>
+			<Latex>
+				{`$\\forall ε > 0 \\space \\exists δ = δ(ε) > 0: \\forall ${'x'}: $`}
+			</Latex>
+			<InputBox
+				value={data.gamma}
+				handler={value =>
+					dispatch(setDefinitionForm({ ...data, gamma: value }))
+				}
+				maxLength={12}
+			/>
+			<Latex>{`$ \\Rightarrow $`}</Latex>
+			<InputBox
+				value={data.eps}
+				handler={value =>
+					dispatch(setDefinitionForm({ ...data, eps: value }))
+				}
+				maxLength={12}
+			/>
+			<Latex>{`$ <ε $`}</Latex>
 		</div>
 	)
 }
