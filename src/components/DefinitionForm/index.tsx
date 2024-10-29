@@ -1,4 +1,6 @@
 import Latex from 'react-latex'
+import { useSelector } from 'react-redux'
+
 import InputBox from '../InputBox'
 
 /*
@@ -7,6 +9,8 @@ type = 'input | display'
 */
 
 const DefinitionForm = ({ type }) => {
+	const data = useSelector(state => state.DefinitionForm)
+
 	if (type === 'input') {
 		return (
 			<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>

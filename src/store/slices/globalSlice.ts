@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 	limitForm: {
-		from: '',
-		to: '',
+		from: 'x',
+		to: '-∞',
 		func: 'f(x)',
-		equal: '',
+		equal: '27',
 	},
 	definitionForm: {
-		gamma: '0<|f(x)|<δ',
+		gamma: 'x<-δ',
 		eps: '|f(x)-27|',
 	},
 }
