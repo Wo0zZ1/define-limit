@@ -17,14 +17,14 @@ const DefinitionForm: FC<IFormProps> = ({ type }) => {
 
 	if (type === 'display') {
 		return (
-			<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>
+			<div className='flex items-center gap-2 p-4 min-h-[130px] bg-white rounded-lg shadow-md relative max-w-full text-sm max-[600px]:overflow-y-auto sm:text-lg md:text-xl lg:text-2xl'>
 				<Latex>{`$ \\forall ε > 0 \\space ∃δ = δ(ε) > 0: \\forall ${'x'}: ${'x < -δ'} \\Rightarrow ${'|f(x) - 27|'} < ε $`}</Latex>
 			</div>
 		)
 	}
 
 	return (
-		<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>
+		<div className='flex items-center gap-2 p-4 min-h-[130px] bg-white rounded-lg shadow-md relative max-w-full text-sm max-[600px]:overflow-y-auto sm:text-lg md:text-xl lg:text-2xl'>
 			<Latex>
 				{`$\\forall ε > 0 \\space \\exists δ = δ(ε) > 0: \\forall ${'x'}: $`}
 			</Latex>
