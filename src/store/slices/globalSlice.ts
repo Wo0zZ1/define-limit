@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface ILimitState {
-	from: string
 	to: string
 	func: string
 	equal: string
@@ -14,13 +13,16 @@ export interface IDefinitionState {
 }
 
 export interface globalState {
+	functionChar: string
+	argumentChar: string
 	limitForm: ILimitState
 	definitionForm: IDefinitionState
 }
 
 const defaultState: globalState = {
+	functionChar: 'f',
+	argumentChar: 'x',
 	limitForm: {
-		from: 'x',
 		to: '-∞',
 		func: 'f(x)',
 		equal: '27',
@@ -52,13 +54,13 @@ export const globalSlice = createSlice({
 				1,
 				3,
 			)
-
-			state.limitForm.from = argumentChar // Изменить аргумент
+			state.argumentChar = argumentChar
+			state.functionChar = functionChar
 
 			if (state.limitForm.equal === '0')
-				state.definitionForm.eps = `|${functionChar}(${argumentChar})|`
-			else
-				state.definitionForm.eps = `|${functionChar}(${argumentChar})-${state.limitForm.equal}|`
+				state.definitionForm.eps = `|${state.functionChar}(${state.argumentChar})|`
+			else if (state.limitForm.equal.length)
+				state.definitionForm.eps = `|${state.functionChar}(${state.argumentChar})-${state.limitForm.equal}|`
 
 			// gamma
 			if ('+-'.includes(state.limitForm.to[0])) {
@@ -83,6 +85,13 @@ export const globalSlice = createSlice({
 							? `0<${argumentChar}<δ`
 							: `0<-${argumentChar}<δ`
 					}`
+				} else if (
+					Number.isInteger(parseInt(state.limitForm.to))
+				) {
+					// -num
+					state.definitionForm.gamma = `0<|${argumentChar}${
+						sign === '+' ? '-' : '+'
+					}${state.limitForm.to.substring(1)}|<δ`
 				}
 			} else if (state.limitForm.to[0] === '0') {
 				if (state.limitForm.to === '0')
@@ -109,24 +118,23 @@ export const globalSlice = createSlice({
 				state.definitionForm.gamma = `|${argumentChar}|>δ`
 			} else {
 				// num, num - 0, num + 0
-				if (Number.isInteger(state.limitForm.to)) {
+
+				if (!/\D/.test(state.limitForm.to)) {
 					// num
+					console.log(1)
+
 					state.definitionForm.gamma = `0<|${argumentChar}-${state.limitForm.to}|<δ`
-				} else if (
-					state.limitForm.to.replace(' ', '').includes('+0')
-				) {
+				} else if (state.limitForm.to.includes('+0')) {
 					// num + 0
 					state.definitionForm.gamma = `0<${argumentChar}-${state.limitForm.to.slice(
 						0,
 						state.limitForm.to.indexOf('+0'),
 					)}<δ`
-				} else if (
-					state.limitForm.to.replace(' ', '').includes('-0')
-				) {
+				} else if (state.limitForm.to.includes('-0')) {
 					// num + 0
 					state.definitionForm.gamma = `0<${state.limitForm.to.slice(
 						0,
-						state.limitForm.to.indexOf('+0'),
+						state.limitForm.to.indexOf('-0'),
 					)}-${argumentChar}<δ`
 				}
 			}

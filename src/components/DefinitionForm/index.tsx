@@ -10,7 +10,7 @@ import { IFormProps } from '../../utils/types'
 
 const DefinitionForm: FC<IFormProps> = ({ type }) => {
 	const data = useSelector(
-		(state: RootState) => state.globalSlice.definitionForm,
+		(state: RootState) => state.globalSlice,
 	)
 
 	const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const DefinitionForm: FC<IFormProps> = ({ type }) => {
 	if (type === 'display') {
 		return (
 			<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>
-				<Latex>{`$ \\forall ε > 0 \\space ∃δ = δ(ε) > 0: \\forall ${'x'}: ${'x < -δ'} \\Rightarrow ${'|f(x) - 27|'} < ε $`}</Latex>
+				<Latex>{`$ \\forall ε > 0 \\space ∃δ = δ(ε) > 0: \\forall ${data.argumentChar}: ${data.definitionForm.gamma} \\Rightarrow ${data.definitionForm.eps} < ε $`}</Latex>
 			</div>
 		)
 	}
@@ -26,20 +26,30 @@ const DefinitionForm: FC<IFormProps> = ({ type }) => {
 	return (
 		<div className='flex justify-center items-center gap-2 p-4 min-w-[600px] min-h-[130px] bg-white rounded-lg shadow-md relative text-2xl'>
 			<Latex>
-				{`$\\forall ε > 0 \\space \\exists δ = δ(ε) > 0: \\forall ${'x'}: $`}
+				{`$\\forall ε > 0 \\space \\exists δ = δ(ε) > 0: \\forall ${data.argumentChar}: $`}
 			</Latex>
 			<InputBox
-				value={data.gamma}
+				value={data.definitionForm.gamma}
 				handler={value =>
-					dispatch(setDefinitionForm({ ...data, gamma: value }))
+					dispatch(
+						setDefinitionForm({
+							...data.definitionForm,
+							gamma: value,
+						}),
+					)
 				}
 				maxLength={12}
 			/>
 			<Latex>{`$ \\Rightarrow $`}</Latex>
 			<InputBox
-				value={data.eps}
+				value={data.definitionForm.eps}
 				handler={value =>
-					dispatch(setDefinitionForm({ ...data, eps: value }))
+					dispatch(
+						setDefinitionForm({
+							...data.definitionForm,
+							eps: value,
+						}),
+					)
 				}
 				maxLength={12}
 			/>
