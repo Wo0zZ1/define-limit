@@ -9,6 +9,7 @@ export interface IInputBoxProps {
 	className?: string
 	maxLength?: number
 	size?: 32 | 48
+	disabled?: boolean
 }
 
 const InputBox: FC<IInputBoxProps> = ({
@@ -17,6 +18,7 @@ const InputBox: FC<IInputBoxProps> = ({
 	handler,
 	maxLength = 50,
 	size = 32,
+	disabled = false,
 }) => {
 	const changeHandler = (
 		e: ChangeEvent<HTMLInputElement>,
@@ -39,6 +41,7 @@ const InputBox: FC<IInputBoxProps> = ({
 				size === 32 ? 1 : 0
 			} outline-none text-center border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[29px]`}
 			required
+			disabled={disabled}
 			value={value}
 			onChange={changeHandler}
 			onFocus={inputSelectHandler}

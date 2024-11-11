@@ -34,6 +34,7 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 					handler={value =>
 						dispatch(setLimitForm({ ...data, from: value }))
 					}
+					disabled
 					maxLength={1}
 					className='absolute bottom-0 left-0'
 				/>
