@@ -10,7 +10,7 @@ import { IFormProps } from '../../utils/types'
 
 const LimitForm: FC<IFormProps> = ({ type }) => {
 	const data = useSelector(
-		(state: RootState) => state.globalSlice.limitForm,
+		(state: RootState) => state.globalSlice,
 	)
 
 	const dispatch = useDispatch()
@@ -30,19 +30,19 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 					<Latex>{'$\\lim$'}</Latex>
 				</div>
 				<InputBox
-					value={data.from}
-					handler={value =>
-						dispatch(setLimitForm({ ...data, from: value }))
-					}
+					value={data.argumentChar}
+					disabled
 					maxLength={1}
 					className='absolute bottom-0 left-0'
 				/>
 				<InputBox
-					value={data.to}
+					value={data.limitForm.to}
 					handler={value =>
-						dispatch(setLimitForm({ ...data, to: value }))
+						dispatch(
+							setLimitForm({ ...data.limitForm, to: value }),
+						)
 					}
-					maxLength={3}
+					maxLength={4}
 					className='absolute bottom-0 -translate-x-[32px] left-full'
 				/>
 				<div className='absolute bottom-0 -translate-x-1/2 left-1/2 text-2xl'>
@@ -52,18 +52,22 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 
 			<div className='flex gap-2 items-center -mt-4'>
 				<InputBox
-					value={data.func}
+					value={data.limitForm.func}
 					handler={value =>
-						dispatch(setLimitForm({ ...data, func: value }))
+						dispatch(
+							setLimitForm({ ...data.limitForm, func: value }),
+						)
 					}
 					maxLength={10}
 					size={48}
 				/>
 				<Latex>$=$</Latex>
 				<InputBox
-					value={data.equal}
+					value={data.limitForm.equal}
 					handler={value =>
-						dispatch(setLimitForm({ ...data, equal: value }))
+						dispatch(
+							setLimitForm({ ...data.limitForm, equal: value }),
+						)
 					}
 					maxLength={10}
 				/>
