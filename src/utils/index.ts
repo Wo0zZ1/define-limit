@@ -1,5 +1,9 @@
-export const getInputWidth = (length: number, size: number) => {
-	return Math.max(size, (length + 1) * 16) + 'px'
+export const getInputWidth = (
+	length: number,
+	k: number,
+	minSize: number = 0,
+) => {
+	return Math.max(k * minSize, (length + 1) * (16 * k)) + 'px'
 }
 
 export const inputSelectHandler = e => {

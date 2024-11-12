@@ -7,6 +7,7 @@ import { RootState } from '../../store'
 
 import InputBox from '../InputBox'
 import { IFormProps } from '../../utils/types'
+import useMedia from '../../hooks/useMedia'
 
 const LimitForm: FC<IFormProps> = ({ type }) => {
 	const data = useSelector(
@@ -15,18 +16,24 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 
 	const dispatch = useDispatch()
 
-	if (type === 'display') {
+	if (type === 'display')
 		return (
-			<div className='flex justify-center p-4 items-center min-w-[350px] min-h-[130px] bg-white rounded-lg shadow-md relative text-3xl'>
+			<div className='flex p-4 bg-white rounded-lg shadow-md text-sm sm:text-lg md:text-xl lg:text-2xl'>
 				<Latex>{`$\\lim_{x\\to +\\infty}=${27}$`}</Latex>
 			</div>
 		)
-	}
+
+	const width1024 = useMedia('width < 1024px')
 
 	return (
-		<div className='flex justify-center p-4 items-center min-w-[350px] min-h-[130px] bg-white rounded-lg shadow-md relative text-3xl'>
-			<div className='mt-6 relative w-[100px] h-[80px]'>
-				<div className={`absolute left-1/2 -translate-x-1/2`}>
+		<div className='flex p-4 bg-white rounded-lg shadow-md text-sm sm:text-lg md:text-xl lg:text-2xl'>
+			<div className='mt-6 relative w-[100px] h-[85px]'>
+				<div
+					style={{
+						fontSize: `${(width1024 ? 1 : 1) * 1.875}rem`,
+						lineHeight: `${(width1024 ? 1 : 1) * 2.25}rem`,
+					}}
+					className={`absolute left-1/2 -translate-x-1/2`}>
 					<Latex>{'$\\lim$'}</Latex>
 				</div>
 				<InputBox
@@ -49,8 +56,7 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 					<Latex>{'$\\to$'}</Latex>
 				</div>
 			</div>
-
-			<div className='flex gap-2 items-center -mt-4'>
+			<div className='flex gap-2 items-center -mt-5'>
 				<InputBox
 					value={data.limitForm.func}
 					handler={value =>

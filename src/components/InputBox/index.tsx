@@ -1,5 +1,6 @@
-import { ChangeEvent, FC } from 'react'
+import { ChangeEvent, FC, useEffect } from 'react'
 
+import useMedia from '../../hooks/useMedia'
 import { getInputWidth, inputSelectHandler } from '../../utils'
 
 // TODO change type for handler
@@ -29,15 +30,20 @@ const InputBox: FC<IInputBoxProps> = ({
 		handler(data)
 	}
 
+	const width1024 = useMedia('width<1024px')
+
 	return (
 		<input
 			style={{
-				width: getInputWidth(value.length, size),
-				height: size,
+				width: getInputWidth(
+					value.length,
+					width1024 ? 0.75 : 1,
+					size,
+				),
+				height: (width1024 ? 0.8 : 1) * size,
+				fontSize: (width1024 ? 0.75 : 1) * 29,
 			}}
-			className={`${className} flex p-${
-				size === 32 ? 1 : 0
-			} outline-none text-center border focus:border-solid invalid:border-dashed border-black/60 font-mono text-[29px]`}
+			className={`${className} flex outline-none text-center border focus:border-solid invalid:border-dashed border-black/60 font-mono`}
 			required
 			maxLength={maxLength}
 			disabled={disabled}
