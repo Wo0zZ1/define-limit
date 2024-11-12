@@ -1,6 +1,7 @@
-import { ChangeEvent, FC, useEffect } from 'react'
+import { type ChangeEvent, FC } from 'react'
 
 import useMedia from '../../hooks/useMedia'
+
 import { getInputWidth, inputSelectHandler } from '../../utils'
 
 // TODO change type for handler

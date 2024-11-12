@@ -1,11 +1,12 @@
-import { FC, useEffect } from 'react'
+import { type FC } from 'react'
 import Latex from 'react-latex'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setDefinitionForm } from '../../store/slices/globalSlice'
 import { RootState } from '../../store'
 
-import InputBox from '../InputBox'
+import { InputBox } from '../'
+
 import { IFormProps } from '../../types'
 
 const DefinitionForm: FC<IFormProps> = ({ type }) => {

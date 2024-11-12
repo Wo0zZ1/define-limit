@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+import { type FC, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import Logo from '../logo'
+import { Logo } from '../'
+
+import { path } from '../../types'
 
 import styles from './index.module.scss'
 
-export type path = 'definition-to-limit' | 'limit-to-definition'
-
-const index = () => {
+const index: FC = () => {
 	const history = useLocation()
 
 	const [link, setLink] = useState<path>('definition-to-limit')

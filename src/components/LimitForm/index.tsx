@@ -9,7 +9,7 @@ import { type IFormProps } from '../../types'
 
 import useMedia from '../../hooks/useMedia'
 
-import InputBox from '../InputBox'
+import { InputBox } from '../'
 
 const LimitForm: FC<IFormProps> = ({ type }) => {
 	const data = useSelector(
