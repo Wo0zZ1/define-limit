@@ -1,13 +1,15 @@
-import { FC, useEffect } from 'react'
+import { type FC } from 'react'
 import Latex from 'react-latex'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setLimitForm } from '../../store/slices/globalSlice'
 import { RootState } from '../../store'
 
-import InputBox from '../InputBox'
-import { IFormProps } from '../../utils/types'
+import { type IFormProps } from '../../utils/types'
+
 import useMedia from '../../hooks/useMedia'
+
+import InputBox from '../InputBox'
 
 const LimitForm: FC<IFormProps> = ({ type }) => {
 	const data = useSelector(
@@ -19,7 +21,7 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 	if (type === 'display')
 		return (
 			<div className='flex p-4 bg-white rounded-lg shadow-md text-sm sm:text-lg md:text-xl lg:text-2xl'>
-				<Latex>{`$\\lim_{x\\to +\\infty}=${27}$`}</Latex>
+				<Latex>{`$\\lim_{${data.argumentChar} \\to ${data.limitForm.to}}{${data.functionChar}(${data.argumentChar})}=${data.limitForm.equal}$`}</Latex>
 			</div>
 		)
 
