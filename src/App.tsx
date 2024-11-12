@@ -1,4 +1,9 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
+import {
+	Routes,
+	Route,
+	BrowserRouter,
+	Navigate,
+} from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import { store } from './store'
@@ -22,7 +27,10 @@ const App = () => {
 						path='/definition-to-limit'
 						element={<DefinitionToLimit />}
 					/>
-					<Route path='*' element={<NotFound />} />
+					<Route
+						path='*'
+						element={<Navigate to={'limit-to-definition'} />}
+					/>
 				</Routes>
 			</Provider>
 		</BrowserRouter>

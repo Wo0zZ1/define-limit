@@ -6,7 +6,7 @@ import { setDefinitionForm } from '../../store/slices/globalSlice'
 import { RootState } from '../../store'
 
 import InputBox from '../InputBox'
-import { IFormProps } from '../../utils/types'
+import { IFormProps } from '../../types'
 
 const DefinitionForm: FC<IFormProps> = ({ type }) => {
 	const data = useSelector(

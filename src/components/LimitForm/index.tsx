@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLimitForm } from '../../store/slices/globalSlice'
 import { RootState } from '../../store'
 
-import { type IFormProps } from '../../utils/types'
+import { type IFormProps } from '../../types'
 
 import useMedia from '../../hooks/useMedia'
 
