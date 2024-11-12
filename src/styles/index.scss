@@ -6,19 +6,8 @@
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-/*
-text:
-#333333 - default
-#666666 - active
-#999999 - not active
-
-palitra:
-#8d97e8
-#9d92e9
-#af8de8
-#c78de9
-#de8de8
-*/
+// variables
+@import './variables.scss';
 
 #root {
 	font-family: Inter, 'Roboto', system-ui, Avenir, Helvetica,

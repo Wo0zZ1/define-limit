@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.link {
+	@apply overflow-hidden cursor-default flex items-center gap-5 h-16 px-5 rounded-xl text-2xl font-bold uppercase;
+
+	background: {
+		image: linear-gradient(45deg, $pink 50%, transparent 50%);
+		position: 100%;
+		size: 400%;
+	}
+
+	border-color: $pink;
+	border: 1px solid $pink;
+	color: $pink;
+
+	transition: 200ms ease-in-out;
+	transition-property: background, color;
+
+	&:hover {
+		background-position: 0;
+
+		@apply text-white;
+	}
+}

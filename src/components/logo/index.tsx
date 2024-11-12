@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom'
+
 import Logo from '/vite.svg'
+
+import styles from './index.module.scss'
 
 const index = () => {
 	return (
-		<Link
-			to='/limit-to-definition'
-			className='flex gap-5 rounded-xl px-5 py-3 bg-[#DE8DE8bd] hover:bg-[#DE8DE8] transition-colors'>
+		<div className={styles.link}>
 			<img src={Logo} alt='logo' />
-			<span className='text-3xl text-[#333333] font-bold uppercase'>
-				Define Limit
-			</span>
-		</Link>
+			<span>Define Limit</span>
+		</div>
 	)
 }
 export default index

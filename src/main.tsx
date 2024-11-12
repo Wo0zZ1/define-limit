@@ -4,6 +4,6 @@ import App from './App.js'
 
 import 'katex/dist/katex.min.css'
 
-import './index.scss'
+import './styles/index.scss'
 
 createRoot(document.getElementById('root')).render(<App />)

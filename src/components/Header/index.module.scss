@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.link {
+	@apply relative z-0 overflow-hidden flex items-center h-16 px-5 rounded-xl transition-colors text-2xl font-bold uppercase;
+
+	border-color: $purple;
+	border: 1px solid $purple;
+	color: $purple;
+
+	&:after {
+		@apply absolute -z-10 block top-0 left-1/2 -translate-x-1/2 w-0 h-full transition-[width];
+
+		content: '';
+		background: $purple;
+	}
+
+	&:hover {
+		@apply text-white after:w-[110%];
+	}
+}

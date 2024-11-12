@@ -9,18 +9,6 @@ import {
 	NotFound,
 } from './pages'
 
-// const getFormula = data => {
-// 	if (typeof data === 'string') {
-// 		let temp = data.toLowerCase()
-// 		if (!temp.includes('inf') && !temp.includes('&')) return
-// 		if ('+-'.includes(temp[0])) data = `${temp[0]}\\infty`
-// 		else data = `\\infty`
-// 	} else if (!Number.isInteger(data)) {
-// 		return alert('Введите число, либо бесконечность')
-// 	}
-// 	return `Fraction is $lim_{x\\to` + data + `} f(x)$`
-// }
-
 const App = () => {
 	return (
 		<BrowserRouter>
