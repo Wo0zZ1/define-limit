@@ -93,5 +93,85 @@ export const limitChangeHandler = (state: globalState) => {
 
 export const definitionChangeHandler = (state: globalState) => {
 	// parsing eps
-	state.definitionForm.eps
+	const parsedEqual =
+		/\|([a-zA-Z])\(([a-zA-Z])\)(?:([-+])(\d+))?\|/.exec(
+			state.definitionForm.eps,
+		)
+	if (!parsedEqual) return
+	const [functionChar, argumentChar, sign, num] =
+		parsedEqual.slice(1, 5)
+	state.argumentChar = argumentChar
+	state.functionChar = functionChar
+	if (!sign || !num) {
+		// |f(x)|
+		state.limitForm.equal = '0'
+	} else {
+		//|f(x) - [num]|
+		state.limitForm.equal =
+			num === '0' ? '0' : (sign === '+' ? '-' : '') + num
+	}
+
+	// 0<x[-+]num<δ
+	const condition1 = RegExp(/0<([a-zA-Z])([-+]\d+)<δ/g).exec(
+		state.definitionForm.gamma,
+	)
+
+	// 0<num[-+]x<δ
+	const condition2 = RegExp(
+		/0<([-+]?\d+)([-+][a-zA-Z])<δ/g,
+	).exec(state.definitionForm.gamma)
+
+	// 0<|x[-+]num|<δ
+	const condition3 = RegExp(
+		/0<\|([a-zA-Z])([-+])([-+]?\d+)\|<δ/g,
+	).exec(state.definitionForm.gamma)
+
+	// 0<|num[-+]x)|<δ
+	const condition4 = RegExp(
+		/0<\|([-+]?\d+)([-+])([a-zA-Z])\|<δ/g,
+	).exec(state.definitionForm.gamma)
+
+	// x(?:(?:<-δ)|(?:>\+?δ))?
+	const condition5 = RegExp(
+		/([a-zA-Z])(?:(?:(<)-δ)|(?:(>)\+?δ))/g,
+	).exec(state.definitionForm.gamma)
+
+	// |x|[<>]δ
+	const condition6 = RegExp(/\|([a-zA-Z])\|([<>])δ/g).exec(
+		state.definitionForm.gamma,
+	)
+
+	// parsing gamma
+	if (condition1?.[0]) {
+		const [argumentChar, num] = condition1.slice(1, 3)
+		const parsedNum = parseFloat(num)
+		state.limitForm.to = `${-parsedNum}+0`
+	} else if (condition2?.[0]) {
+		const [num, sign, argumentChar] = condition2.slice(1, 4)
+		const parsedNum = parseFloat(num)
+		state.limitForm.to =
+			sign === '+' ? `${-parsedNum}-0` : `${parsedNum}-0`
+	} else if (condition3?.[0]) {
+		const [argumentChar, sign, num] = condition3.slice(1, 4)
+		const parsedNum = parseFloat(num)
+		state.limitForm.to =
+			sign === '+'
+				? (-parsedNum).toString()
+				: parsedNum.toString()
+	} else if (condition4?.[0]) {
+		const [num, sign, argumentChar] = condition4.slice(1, 4)
+		const parsedNum = parseFloat(num)
+		state.limitForm.to =
+			sign === '+'
+				? (-parsedNum).toString()
+				: parsedNum.toString()
+	} else if (condition5?.[0]) {
+		const [argumentChar, compareSign] = condition5.slice(1, 4)
+		state.limitForm.to = compareSign === '<' ? '-∞' : '+∞'
+	} else if (condition6?.[0]) {
+		const [argumentChar, compareSign] = condition6.slice(1, 3)
+		state.limitForm.to = compareSign === '<' ? '0' : '∞'
+	}
+
+	// console.log(parsedEqual)
 }
