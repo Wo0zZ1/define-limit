@@ -28,7 +28,13 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 	const width1024 = useMedia('width < 1024px')
 
 	return (
-		<div className='flex p-4 bg-white rounded-lg shadow-md text-sm sm:text-lg md:text-xl lg:text-2xl'>
+		<div
+			style={{
+				outline: !data.limitForm.correct
+					? '2px solid rgb(194 65 12 / 0.6)'
+					: '',
+			}}
+			className='flex p-4 bg-white rounded-lg shadow-md text-sm sm:text-lg md:text-xl lg:text-2xl'>
 			<div className='mt-6 relative w-[100px] h-[85px]'>
 				<div
 					style={{

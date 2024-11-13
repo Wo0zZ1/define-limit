@@ -9,11 +9,13 @@ export interface ILimitState {
 	to: string
 	func: string
 	equal: string
+	correct: boolean
 }
 
 export interface IDefinitionState {
 	gamma: string
 	eps: string
+	correct: boolean
 }
 
 export interface globalState {

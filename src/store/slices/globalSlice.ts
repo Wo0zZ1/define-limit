@@ -18,10 +18,12 @@ const defaultState: globalState = {
 		to: '-∞',
 		func: 'f(x)',
 		equal: '27',
+		correct: true,
 	},
 	definitionForm: {
 		gamma: 'x<-δ',
 		eps: '|f(x)-27|',
+		correct: true,
 	},
 }
 

@@ -24,7 +24,13 @@ const DefinitionForm: FC<IFormProps> = ({ type }) => {
 		)
 
 	return (
-		<div className='flex items-center gap-2 p-4 overflow-x-auto max-w-full min-h-[4rem] lg:min-h-[6rem] bg-white rounded-lg shadow-md relative text-sm sm:text-lg md:text-xl lg:text-2xl'>
+		<div
+			style={{
+				outline: !data.definitionForm.correct
+					? '2px solid rgb(194 65 12 / 0.6)'
+					: '',
+			}}
+			className='flex items-center gap-2 p-4 overflow-x-auto max-w-full min-h-[4rem] lg:min-h-[6rem] bg-white rounded-lg shadow-md relative text-sm sm:text-lg md:text-xl lg:text-2xl'>
 			<Latex>
 				{`$\\forall ε > 0 \\space \\exists δ = δ(ε) > 0: \\forall ${data.argumentChar}: $`}
 			</Latex>

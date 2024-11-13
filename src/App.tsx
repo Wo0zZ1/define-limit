@@ -8,11 +8,7 @@ import { Provider } from 'react-redux'
 
 import { store } from './store'
 
-import {
-	LimitToDefinition,
-	DefinitionToLimit,
-	NotFound,
-} from './pages'
+import { LimitToDefinition, DefinitionToLimit } from './pages'
 
 const App = () => {
 	return (
