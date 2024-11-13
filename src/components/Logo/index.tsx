@@ -3,20 +3,21 @@ import { useDispatch } from 'react-redux'
 
 import { reset } from '../../store/slices/globalSlice'
 
-import Logo from '/vite.svg'
+import LogoIcon from '../../assets/vite.svg?react'
 
 import styles from './index.module.scss'
 
-const index: FC = () => {
+const Logo: FC = () => {
 	const dispatch = useDispatch()
 
 	return (
 		<div
 			className={styles.link}
 			onClick={() => dispatch(reset())}>
-			<img src={Logo} alt='logo' />
+			<LogoIcon />
 			<span>Define Limit</span>
 		</div>
 	)
 }
-export default index
+
+export default Logo

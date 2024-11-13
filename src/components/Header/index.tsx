@@ -1,13 +1,13 @@
 import { type FC, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { Logo } from '../'
+import { Logo } from '../index'
 
 import { path } from '../../types'
 
 import styles from './index.module.scss'
 
-const index: FC = () => {
+const Header: FC = () => {
 	const history = useLocation()
 
 	const [link, setLink] = useState<path>('definition-to-limit')
@@ -36,4 +36,4 @@ const index: FC = () => {
 		</header>
 	)
 }
-export default index
+export default Header
