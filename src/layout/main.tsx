@@ -1,6 +1,6 @@
 import Header from '../components/Header'
 
-const main = ({ children }) => {
+const main = ({ children }: { children: any }) => {
 	return (
 		<>
 			<Header />

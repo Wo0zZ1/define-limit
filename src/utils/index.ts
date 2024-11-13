@@ -1,3 +1,5 @@
+import { FocusEvent } from 'react'
+
 export const getInputWidth = (
 	length: number,
 	k: number,
@@ -6,6 +8,8 @@ export const getInputWidth = (
 	return Math.max(k * minSize, (length + 1) * (16 * k)) + 'px'
 }
 
-export const inputSelectHandler = e => {
+export const inputSelectHandler = (
+	e: FocusEvent<HTMLInputElement, Element>,
+): void => {
 	e.target.select()
 }
