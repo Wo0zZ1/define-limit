@@ -172,23 +172,31 @@ export const definitionChangeHandler = (state: globalState) => {
 	)
 
 	// parsing gamma
+	const checkArgumentChar = (argumentChar: string) => {
+		state.definitionForm.correct =
+			state.argumentChar === argumentChar
+	}
+
 	if (condition1?.[0]) {
 		const [argumentSign, argumentChar, num] = condition1.slice(
 			1,
 			4,
 		)
+		checkArgumentChar(argumentChar)
 		const parsedNum = parseFloat(num)
 		if (argumentSign === '-')
 			state.limitForm.to = `${parsedNum}-0`
 		else state.limitForm.to = `${-parsedNum}+0`
 	} else if (condition2?.[0]) {
 		const [num, sign, argumentChar] = condition2.slice(1, 4)
+		checkArgumentChar(argumentChar)
 		const parsedNum = parseFloat(num)
 		if (sign === '+') state.limitForm.to = `${-parsedNum}+0`
 		else state.limitForm.to = `${parsedNum}-0`
 	} else if (condition3?.[0]) {
 		const [argumentSign, argumentChar, sign, num] =
 			condition3.slice(1, 5)
+		checkArgumentChar(argumentChar)
 		const signToInt = sign === '-' ? -1 : 1
 		const argumentSignToInt = argumentSign === '-' ? -1 : 1
 		const parsedNum = parseFloat(num)
@@ -199,24 +207,27 @@ export const definitionChangeHandler = (state: globalState) => {
 		).toString()
 	} else if (condition4?.[0]) {
 		const [num, sign, argumentChar] = condition4.slice(1, 4)
+		checkArgumentChar(argumentChar)
 		const parsedNum = parseFloat(num)
 		const signToInt = sign === '-' ? -1 : 1
 		state.limitForm.to = (signToInt * -parsedNum).toString()
 	} else if (condition5?.[0]) {
 		const [argumentSign, argumentChar, compareSign, gammaSign] =
 			condition5.slice(1, 5)
+		checkArgumentChar(argumentChar)
 		const argumentSignToInt = argumentSign !== '-'
 		const gammaSignToInt = gammaSign !== '-'
 		const compareSignToInt = compareSign !== '<'
-
 		if (gammaSignToInt == compareSignToInt)
 			state.limitForm.to =
 				argumentSignToInt == gammaSignToInt ? '+∞' : '-∞'
 	} else if (condition6?.[0]) {
 		const [argumentChar, compareSign] = condition6.slice(1, 3)
+		checkArgumentChar(argumentChar)
 		state.limitForm.to = compareSign === '<' ? '0' : '∞'
 	} else if (condition7?.[0]) {
 		const [sign, argumentChar] = condition7.slice(1, 3)
+		checkArgumentChar(argumentChar)
 		state.limitForm.to = sign === '-' ? '0-0' : '0+0'
 	}
 }
