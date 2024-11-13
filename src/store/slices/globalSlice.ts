@@ -47,10 +47,16 @@ export const globalSlice = createSlice({
 			state.definitionForm = action.payload
 			definitionChangeHandler(state)
 		},
+		reset: state => {
+			state.limitForm = { ...defaultState.limitForm }
+			state.definitionForm = { ...defaultState.definitionForm }
+			state.argumentChar = 'x'
+			state.functionChar = 'f'
+		},
 	},
 })
 
-export const { setLimitForm, setDefinitionForm } =
+export const { setLimitForm, setDefinitionForm, reset } =
 	globalSlice.actions
 
 export default globalSlice.reducer

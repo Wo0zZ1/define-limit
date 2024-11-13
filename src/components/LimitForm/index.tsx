@@ -1,8 +1,11 @@
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import Latex from 'react-latex'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setLimitForm } from '../../store/slices/globalSlice'
+import {
+	reset,
+	setLimitForm,
+} from '../../store/slices/globalSlice'
 import { RootState } from '../../store'
 
 import { type IFormProps } from '../../types'
@@ -17,6 +20,10 @@ const LimitForm: FC<IFormProps> = ({ type }) => {
 	)
 
 	const dispatch = useDispatch()
+
+	useEffect(() => {
+		if (!data.definitionForm.correct) dispatch(reset())
+	}, [])
 
 	if (type === 'display')
 		return (

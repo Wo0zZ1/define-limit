@@ -1,8 +1,11 @@
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import Latex from 'react-latex'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setDefinitionForm } from '../../store/slices/globalSlice'
+import {
+	reset,
+	setDefinitionForm,
+} from '../../store/slices/globalSlice'
 import { RootState } from '../../store'
 
 import { InputBox } from '../'
@@ -15,6 +18,10 @@ const DefinitionForm: FC<IFormProps> = ({ type }) => {
 	)
 
 	const dispatch = useDispatch()
+
+	useEffect(() => {
+		if (!data.limitForm.correct) dispatch(reset())
+	}, [])
 
 	if (type === 'display')
 		return (

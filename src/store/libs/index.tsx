@@ -23,9 +23,9 @@ export const limitChangeHandler = (state: globalState) => {
 
 	if (parsedEqual?.[0]) {
 		const [sign, num] = parsedEqual.slice(1, 3)
-		state.definitionForm.eps = `|f(x)${
-			sign === '-' ? '+' : '-'
-		}${parseFloat(num)}|`
+		state.definitionForm.eps = `|${state.functionChar}(${
+			state.argumentChar
+		})${sign === '-' ? '+' : '-'}${parseFloat(num)}|`
 	}
 
 	// gamma

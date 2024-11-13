@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .link {
-	@apply overflow-hidden cursor-default flex items-center gap-5 h-16 px-5 rounded-xl text-2xl font-bold uppercase;
+	@apply overflow-hidden cursor-pointer flex items-center gap-5 h-16 px-5 rounded-xl text-2xl font-bold uppercase;
 
 	background: {
 		image: linear-gradient(45deg, $pink 50%, transparent 50%);
