@@ -2,18 +2,31 @@ import { globalState } from '../../types'
 
 export const limitChangeHandler = (state: globalState) => {
 	// eps
-	const parsedFunction = /([a-zA-Z])\(([a-zA-Z])\)/.exec(
-		state.limitForm.func,
-	)
-	if (!parsedFunction) return
-	const [functionChar, argumentChar] = parsedFunction.slice(1, 3)
-	state.argumentChar = argumentChar
-	state.functionChar = functionChar
 
-	if (state.limitForm.equal === '0')
-		state.definitionForm.eps = `|${state.functionChar}(${state.argumentChar})|`
-	else if (state.limitForm.equal.length)
-		state.definitionForm.eps = `|${state.functionChar}(${state.argumentChar})-${state.limitForm.equal}|`
+	// f(x)
+	const parsedFunction = RegExp(
+		/^([a-zA-Z])\(([a-zA-Z])\)$/g,
+	).exec(state.limitForm.func)
+	if (parsedFunction?.[0]) {
+		const [functionChar, argumentChar] = parsedFunction.slice(
+			1,
+			3,
+		)
+		state.argumentChar = argumentChar
+		state.functionChar = functionChar
+	}
+
+	// [-+]num
+	const parsedEqual = RegExp(/^([-+])?(\d+)$/g).exec(
+		state.limitForm.equal,
+	)
+
+	if (parsedEqual?.[0]) {
+		const [sign, num] = parsedEqual.slice(1, 3)
+		state.definitionForm.eps = `|f(x)${
+			sign === '-' ? '+' : '-'
+		}${parseFloat(num)}|`
+	}
 
 	// gamma
 	if ('+-'.includes(state.limitForm.to[0])) {
@@ -24,10 +37,10 @@ export const limitChangeHandler = (state: globalState) => {
 		if (state.limitForm.to[1] === '∞') {
 			if (state.limitForm.to === '+∞') {
 				// +∞
-				state.definitionForm.gamma = `${argumentChar}>δ`
+				state.definitionForm.gamma = `${state.argumentChar}>δ`
 			} else if (state.limitForm.to === '-∞')
 				// -∞
-				state.definitionForm.gamma = `${argumentChar}<-δ`
+				state.definitionForm.gamma = `${state.argumentChar}<-δ`
 		} else if (
 			state.limitForm.to[1] === '0' &&
 			state.limitForm.to.length === 2
@@ -35,19 +48,19 @@ export const limitChangeHandler = (state: globalState) => {
 			// +0, -0
 			state.definitionForm.gamma = `${
 				sign === '+'
-					? `0<${argumentChar}<δ`
-					: `0<-${argumentChar}<δ`
+					? `0<${state.argumentChar}<δ`
+					: `0<-${state.argumentChar}<δ`
 			}`
 		} else if (Number.isInteger(parseInt(state.limitForm.to))) {
 			// -num
-			state.definitionForm.gamma = `0<|${argumentChar}${
+			state.definitionForm.gamma = `0<|${state.argumentChar}${
 				sign === '+' ? '-' : '+'
 			}${state.limitForm.to.substring(1)}|<δ`
 		}
 	} else if (state.limitForm.to[0] === '0') {
 		if (state.limitForm.to === '0')
 			// 0 + 0, 0 - 0
-			state.definitionForm.gamma = `0<|${argumentChar}|<δ`
+			state.definitionForm.gamma = `0<|${state.argumentChar}|<δ`
 		else if ('+-'.includes(state.limitForm.to[1])) {
 			let sign: '+' | '-'
 			if (state.limitForm.to[1] === '+') sign = '+'
@@ -59,14 +72,14 @@ export const limitChangeHandler = (state: globalState) => {
 			) {
 				state.definitionForm.gamma = `${
 					sign === '+'
-						? `0<${argumentChar}<δ`
-						: `0<-${argumentChar}<δ`
+						? `0<${state.argumentChar}<δ`
+						: `0<-${state.argumentChar}<δ`
 				}`
 			}
 		}
 	} else if (state.limitForm.to === '∞') {
 		// ∞
-		state.definitionForm.gamma = `|${argumentChar}|>δ`
+		state.definitionForm.gamma = `|${state.argumentChar}|>δ`
 	} else {
 		// num, num - 0, num + 0
 
@@ -74,10 +87,12 @@ export const limitChangeHandler = (state: globalState) => {
 			// num
 			console.log(1)
 
-			state.definitionForm.gamma = `0<|${argumentChar}-${state.limitForm.to}|<δ`
+			state.definitionForm.gamma = `0<|${state.argumentChar}-${state.limitForm.to}|<δ`
 		} else if (state.limitForm.to.includes('+0')) {
 			// num + 0
-			state.definitionForm.gamma = `0<${argumentChar}-${state.limitForm.to.slice(
+			state.definitionForm.gamma = `0<${
+				state.argumentChar
+			}-${state.limitForm.to.slice(
 				0,
 				state.limitForm.to.indexOf('+0'),
 			)}<δ`
@@ -86,7 +101,7 @@ export const limitChangeHandler = (state: globalState) => {
 			state.definitionForm.gamma = `0<${state.limitForm.to.slice(
 				0,
 				state.limitForm.to.indexOf('-0'),
-			)}-${argumentChar}<δ`
+			)}-${state.argumentChar}<δ`
 		}
 	}
 }
@@ -96,12 +111,12 @@ export const definitionChangeHandler = (state: globalState) => {
 
 	// |f(x)[-+]num| or |f(x)|
 	const parsedEqual1 = RegExp(
-		/\|([a-zA-Z])\(([a-zA-Z])\)(?:([-+]\d+))?\|/,
+		/^\|([a-zA-Z])\(([a-zA-Z])\)(?:([-+]\d+))?\|$/g,
 	).exec(state.definitionForm.eps)
 
 	// |[-+]num[-+]f(x)|
 	const parsedEqual2 = RegExp(
-		/\|([-+]?\d+)([-+])([a-zA-Z])\(([a-zA-Z])\)\|/,
+		/^\|([-+]?\d+)([-+])([a-zA-Z])\(([a-zA-Z])\)\|$/g,
 	).exec(state.definitionForm.eps)
 	if (parsedEqual1?.[0]) {
 		const [functionChar, argumentChar, num] = parsedEqual1.slice(
@@ -123,36 +138,36 @@ export const definitionChangeHandler = (state: globalState) => {
 
 	// 0<[-+]?x[-+]num<δ
 	const condition1 = RegExp(
-		/0<([-+]?)([a-zA-Z])([-+]\d+)<δ/g,
+		/0<([-+]?)([a-zA-Z])([-+]\d+)<δ$/g,
 	).exec(state.definitionForm.gamma)
 
 	// 0<[-+]?num[-+]x<δ
 	const condition2 = RegExp(
-		/0<([-+]?\d+)([-+])([a-zA-Z])<δ/g,
+		/^0<([-+]?\d+)([-+])([a-zA-Z])<δ$/g,
 	).exec(state.definitionForm.gamma)
 
 	// 0<|[-+]?x[-+]num|<δ
 	const condition3 = RegExp(
-		/0<\|([-+]?)([a-zA-Z])([-+])(-?\d+)\|<δ/g,
+		/^0<\|([-+]?)([a-zA-Z])([-+])(-?\d+)\|<δ$/g,
 	).exec(state.definitionForm.gamma)
 
 	// 0<|num[-+]x)|<δ
 	const condition4 = RegExp(
-		/0<\|([-+]?\d+)([-+])([a-zA-Z])\|<δ/g,
+		/^0<\|([-+]?\d+)([-+])([a-zA-Z])\|<δ$/g,
 	).exec(state.definitionForm.gamma)
 
 	// [-+]?x[<>][-+]?δ
 	const condition5 = RegExp(
-		/([-+]?)([a-zA-Z])([<>])([-+]?)δ/g,
+		/^([-+]?)([a-zA-Z])([<>])([-+]?)δ$/g,
 	).exec(state.definitionForm.gamma)
 
 	// |x|[<>]δ
-	const condition6 = RegExp(/\|([a-zA-Z])\|([<>])δ/g).exec(
+	const condition6 = RegExp(/^\|([a-zA-Z])\|([<>])δ$/g).exec(
 		state.definitionForm.gamma,
 	)
 
 	// 0<x<δ
-	const condition7 = RegExp(/0<([-+])?([a-zA-Z])<δ/g).exec(
+	const condition7 = RegExp(/^0<([-+])?([a-zA-Z])<δ$/g).exec(
 		state.definitionForm.gamma,
 	)
 
@@ -167,8 +182,7 @@ export const definitionChangeHandler = (state: globalState) => {
 			state.limitForm.to = `${parsedNum}-0`
 		else state.limitForm.to = `${-parsedNum}+0`
 	} else if (condition2?.[0]) {
-		const [num, sign, argumentSign, argumentChar] =
-			condition2.slice(1, 4)
+		const [num, sign, argumentChar] = condition2.slice(1, 4)
 		const parsedNum = parseFloat(num)
 		if (sign === '+') state.limitForm.to = `${-parsedNum}+0`
 		else state.limitForm.to = `${parsedNum}-0`
