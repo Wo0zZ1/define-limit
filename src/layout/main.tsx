@@ -4,7 +4,7 @@ const main = ({ children }) => {
 	return (
 		<>
 			<Header />
-			<div className='container w-full mx-auto mt-24'>
+			<div className='container w-full mt-24'>
 				<main
 					style={{
 						background:

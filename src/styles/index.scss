@@ -33,14 +33,6 @@ body {
 	background-repeat: no-repeat;
 }
 
-.container {
-	padding: 0 2rem;
-
-	@media (width <= 600px) {
-		padding: 0 1rem;
-	}
-}
-
 // Glass effect
 .glass {
 	@apply backdrop-blur-md;

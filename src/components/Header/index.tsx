@@ -22,7 +22,7 @@ const index: FC = () => {
 
 	return (
 		<header className='w-full bg-white h-24 shadow-md'>
-			<div className='hidden container w-full m-auto h-full sm:flex justify-between items-center'>
+			<div className='hidden container w-full h-full sm:flex justify-between items-center'>
 				<Logo />
 				<Link to={`/${link}`} className={styles.link}>
 					<span>
