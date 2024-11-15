@@ -22,7 +22,7 @@ const defaultState: globalState = {
 	},
 	definitionForm: {
 		gamma: 'x<-δ',
-		eps: '|f(x)-27|',
+		eps: '|f(x)-27|<',
 		correct: true,
 	},
 }

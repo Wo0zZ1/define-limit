@@ -26,7 +26,7 @@ const DefinitionForm: FC<IFormProps> = ({ type }) => {
 	if (type === 'display')
 		return (
 			<div className='flex items-center gap-2 p-4 overflow-x-auto max-w-full min-h-[4rem] lg:min-h-[6rem] bg-white rounded-lg shadow-md relative text-sm sm:text-lg md:text-xl lg:text-2xl'>
-				<Latex>{`$ \\forall ε > 0 \\space ∃δ = δ(ε) > 0: \\forall ${data.argumentChar}: ${data.definitionForm.gamma} \\Rightarrow ${data.definitionForm.eps} < ε $`}</Latex>
+				<Latex>{`$ \\forall ε > 0 \\space ∃δ = δ(ε) > 0: \\forall ${data.argumentChar}: ${data.definitionForm.gamma} \\Rightarrow ${data.definitionForm.eps} ε $`}</Latex>
 			</div>
 		)
 
@@ -66,7 +66,7 @@ const DefinitionForm: FC<IFormProps> = ({ type }) => {
 				}
 				maxLength={12}
 			/>
-			<Latex>{`$ <ε $`}</Latex>
+			<Latex>{`$ ε $`}</Latex>
 		</div>
 	)
 }
