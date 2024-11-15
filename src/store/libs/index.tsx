@@ -205,9 +205,9 @@ export const definitionChangeHandler = (state: globalState) => {
 		/^0<([-+]?\d+)([-+])([a-zA-Z])<δ$/g,
 	).exec(state.definitionForm.delta)
 
-	// 0<|[-+]?x[-+]num|<δ
+	// 0<|[-+]?x[-+]num|<δ or 0<|[-+]?x|<δ
 	const condition3 = RegExp(
-		/^0<\|([-+]?)([a-zA-Z])([-+])(\d+)\|<δ$/g,
+		/^0<\|([-+]?)([a-zA-Z])(?:([-+])(\d+))?\|<δ$/g,
 	).exec(state.definitionForm.delta)
 
 	// 0<|num[-+]x)|<δ
@@ -261,7 +261,7 @@ export const definitionChangeHandler = (state: globalState) => {
 		state.limitForm.to = (
 			argumentSignToInt *
 			signToInt *
-			-parsedNum
+			-(parsedNum || 0)
 		).toString()
 	} else if (condition4?.[0]) {
 		const [num, sign, argumentChar] = condition4.slice(1, 4)
