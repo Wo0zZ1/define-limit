@@ -21,8 +21,8 @@ const defaultState: globalState = {
 		correct: true,
 	},
 	definitionForm: {
-		gamma: 'x<-δ',
-		eps: '|f(x)-27|',
+		delta: 'x<-δ',
+		eps: '|f(x)-27|<',
 		correct: true,
 	},
 }
