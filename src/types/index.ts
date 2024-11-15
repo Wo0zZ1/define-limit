@@ -13,7 +13,7 @@ export interface ILimitState {
 }
 
 export interface IDefinitionState {
-	gamma: string
+	delta: string
 	eps: string
 	correct: boolean
 }

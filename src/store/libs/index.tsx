@@ -64,43 +64,43 @@ export const limitChangeHandler = (state: globalState) => {
 		const [sign] = condition1.slice(1, 2)
 		switch (sign) {
 			case '-':
-				state.definitionForm.gamma = state.argumentChar + '<-δ'
+				state.definitionForm.delta = state.argumentChar + '<-δ'
 				break
 			case '+':
-				state.definitionForm.gamma = state.argumentChar + '>δ'
+				state.definitionForm.delta = state.argumentChar + '>δ'
 				break
 			default:
-				state.definitionForm.gamma = `0<|${state.argumentChar}|<δ`
+				state.definitionForm.delta = `0<|${state.argumentChar}|<δ`
 				break
 		}
 	} else if (condition2?.[0]) {
 		const [sign] = condition2.slice(1, 2)
 		switch (sign) {
 			case '+':
-				state.definitionForm.gamma = `0<${state.argumentChar}<δ`
+				state.definitionForm.delta = `0<${state.argumentChar}<δ`
 				break
 			case '-':
-				state.definitionForm.gamma = `0<-${state.argumentChar}<δ`
+				state.definitionForm.delta = `0<-${state.argumentChar}<δ`
 				break
 			default:
-				state.definitionForm.gamma = `0<|${state.argumentChar}|<δ`
+				state.definitionForm.delta = `0<|${state.argumentChar}|<δ`
 		}
 	} else if (condition3?.[0]) {
 		const [signNum, num, sign] = condition3.slice(1, 4)
 		const signNumToNum = signNum === '-' ? -1 : 1
 		switch (sign) {
 			case '+':
-				state.definitionForm.gamma = `0<${state.argumentChar}${
+				state.definitionForm.delta = `0<${state.argumentChar}${
 					signNumToNum === 1 ? '' : '+'
 				}${signNumToNum * -parseFloat(num)}<δ`
 				break
 			case '-':
-				state.definitionForm.gamma = `0<${
+				state.definitionForm.delta = `0<${
 					signNumToNum * parseFloat(num)
 				}-${state.argumentChar}<δ`
 				break
 			default:
-				state.definitionForm.gamma = `0<|${state.argumentChar}${
+				state.definitionForm.delta = `0<|${state.argumentChar}${
 					signNumToNum === 1 ? '-' : '+'
 				}${parseFloat(num)}|<δ`
 		}
@@ -193,41 +193,41 @@ export const definitionChangeHandler = (state: globalState) => {
 			state.limitForm.equal = '0'
 	}
 
-	// parsing gamma
+	// parsing delta
 
 	// 0<[-+]?x[-+]num<δ
 	const condition1 = RegExp(
 		/0<([-+]?)([a-zA-Z])([-+]\d+)<δ$/g,
-	).exec(state.definitionForm.gamma)
+	).exec(state.definitionForm.delta)
 
 	// 0<[-+]?num[-+]x<δ
 	const condition2 = RegExp(
 		/^0<([-+]?\d+)([-+])([a-zA-Z])<δ$/g,
-	).exec(state.definitionForm.gamma)
+	).exec(state.definitionForm.delta)
 
 	// 0<|[-+]?x[-+]num|<δ
 	const condition3 = RegExp(
 		/^0<\|([-+]?)([a-zA-Z])([-+])(\d+)\|<δ$/g,
-	).exec(state.definitionForm.gamma)
+	).exec(state.definitionForm.delta)
 
 	// 0<|num[-+]x)|<δ
 	const condition4 = RegExp(
 		/^0<\|([-+]?\d+)([-+])([a-zA-Z])\|<δ$/g,
-	).exec(state.definitionForm.gamma)
+	).exec(state.definitionForm.delta)
 
 	// [-+]?x[<>][-+]?δ
 	const condition5 = RegExp(
 		/^([-+]?)([a-zA-Z])([<>])([-+]?)δ$/g,
-	).exec(state.definitionForm.gamma)
+	).exec(state.definitionForm.delta)
 
 	// |x|[<>]δ
 	const condition6 = RegExp(/^\|([a-zA-Z])\|([<>])δ$/g).exec(
-		state.definitionForm.gamma,
+		state.definitionForm.delta,
 	)
 
 	// 0<x<δ
 	const condition7 = RegExp(/^0<([-+])?([a-zA-Z])<δ$/g).exec(
-		state.definitionForm.gamma,
+		state.definitionForm.delta,
 	)
 
 	const checkArgumentChar = (argumentChar: string) => {
@@ -270,15 +270,15 @@ export const definitionChangeHandler = (state: globalState) => {
 		const signToInt = sign === '-' ? -1 : 1
 		state.limitForm.to = (signToInt * -parsedNum).toString()
 	} else if (condition5?.[0]) {
-		const [argumentSign, argumentChar, compareSign, gammaSign] =
+		const [argumentSign, argumentChar, compareSign, deltaSign] =
 			condition5.slice(1, 5)
 		checkArgumentChar(argumentChar)
 		const argumentSignToInt = argumentSign !== '-'
-		const gammaSignToInt = gammaSign !== '-'
+		const deltaSignToInt = deltaSign !== '-'
 		const compareSignToInt = compareSign !== '<'
-		if (gammaSignToInt == compareSignToInt)
+		if (deltaSignToInt == compareSignToInt)
 			state.limitForm.to =
-				argumentSignToInt == gammaSignToInt ? '+∞' : '-∞'
+				argumentSignToInt == deltaSignToInt ? '+∞' : '-∞'
 	} else if (condition6?.[0]) {
 		const [argumentChar, compareSign] = condition6.slice(1, 3)
 		checkArgumentChar(argumentChar)

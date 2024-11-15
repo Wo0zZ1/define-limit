@@ -26,7 +26,8 @@ const InputBox: FC<IInputBoxProps> = ({
 		e: ChangeEvent<HTMLInputElement>,
 	): void => {
 		const data = e.target.value
-			.replace(/[iI][nN][fF]|&/g, _ => '∞')
+			.replace(/inf|&/gi, _ => '∞')
+			.replace(/delta/gi, _ => 'δ')
 			.replace(' ', '')
 		handler(data)
 	}
