@@ -10,14 +10,7 @@ import styles from './index.module.scss'
 const Logo: FC = () => {
 	const dispatch = useDispatch()
 
-	return (
-		<div
-			className={styles.link}
-			onClick={() => dispatch(reset())}>
-			<LogoIcon />
-			<span>Define Limit</span>
-		</div>
-	)
+	
 }
 
 export default Logo

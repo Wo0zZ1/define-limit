@@ -1,20 +1,23 @@
 @import '../../styles/variables.scss';
 
-.link {
-	@apply relative z-0 overflow-hidden flex items-center h-16 px-5 rounded-xl transition-colors text-2xl font-bold uppercase;
+.logo {
+	@apply w-1/2 xs:w-auto text-center overflow-hidden transition-all duration-300 text-pink border border-pink cursor-pointer flex items-center gap-3 md:gap-5 h-12 px-3 md:h-16 md:px-5 rounded-xl;
 
-	border-color: $purple;
-	border: 1px solid $purple;
-	color: $purple;
-
-	&:after {
-		@apply absolute -z-10 block top-0 left-1/2 -translate-x-1/2 w-0 h-full transition-[width];
-
-		content: '';
-		background: $purple;
+	background: {
+		image: linear-gradient(45deg, $pink 50%, transparent 50%);
+		position: 100%;
+		size: 400%;
 	}
 
-	&:hover {
-		@apply text-white after:w-[110%];
+	@media (hover) {
+		&:hover {
+			background-position: 0;
+
+			@apply text-white;
+		}
 	}
+}
+
+.button {
+	@apply w-1/2 xs:w-auto text-center relative z-0 overflow-hidden transition-colors duration-300 text-purple border border-purple flex items-center h-12 px-3 md:h-16 md:px-5 rounded-xl after:absolute after:content-[""] after:bg-purple after:-z-10 after:block after:top-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-full after:transition-[width] pc:hover:text-white pc:hover:after:w-[110%];
 }
