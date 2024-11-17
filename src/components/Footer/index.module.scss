@@ -1,0 +1,43 @@
+.github {
+	@apply flex items-center gap-3 text-slate-700 text-base md:text-lg lg:text-xl transition-all;
+
+	> svg {
+		@apply w-10 h-10;
+	}
+
+	> span::after {
+		@apply content-[""] block bg-black h-[2px] w-0 opacity-0 transition-all;
+	}
+
+	@media (hover) {
+		&:hover {
+			@apply text-black;
+
+			> span {
+				@apply after:w-full after:opacity-100;
+			}
+		}
+	}
+}
+
+.telegram {
+	@apply flex flex-row-reverse xs:flex-row items-center gap-3 text-slate-700 text-base md:text-lg lg:text-xl transition-all;
+
+	> svg {
+		@apply w-10 h-10;
+	}
+
+	> span::after {
+		@apply content-[""] block bg-[#1188c3] h-[2px] w-0 opacity-0 transition-all;
+	}
+
+	@media (hover) {
+		&:hover {
+			@apply text-[#1188c3];
+
+			> span {
+				@apply after:w-full after:opacity-100;
+			}
+		}
+	}
+}

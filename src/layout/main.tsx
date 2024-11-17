@@ -1,10 +1,10 @@
-import Header from '../components/Header'
+import { Header, Footer } from '../components'
 
 const main = ({ children }: { children: any }) => {
 	return (
 		<>
 			<Header />
-			<div className='container w-full mt-24'>
+			<div className='container my-12 w-full flex-grow'>
 				<main
 					style={{
 						background:
@@ -14,6 +14,7 @@ const main = ({ children }: { children: any }) => {
 					{children}
 				</main>
 			</div>
+			<Footer />
 		</>
 	)
 }

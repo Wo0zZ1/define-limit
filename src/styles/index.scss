@@ -16,11 +16,15 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	// color-scheme: light dark;
 
-	/* color-scheme: light dark; */
+	--pink: #de8de8;
+	--pink-dark: #af8de8;
+	--purple: #8d97e8;
+	--purple-dark: #9d92e9;
 
+	height: 100dvh;
 	min-width: 320px;
-	min-height: 100vh;
 }
 
 body {
