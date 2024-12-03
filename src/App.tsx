@@ -9,8 +9,14 @@ import { Provider } from 'react-redux'
 import { store } from './store'
 
 import { LimitToDefinition, DefinitionToLimit } from './pages'
+import { useEffect } from 'react'
+import { db } from './utils'
 
 const App = () => {
+	useEffect(() => {
+		db.post('./log')
+	}, [])
+
 	return (
 		<BrowserRouter>
 			<Provider store={store}>
